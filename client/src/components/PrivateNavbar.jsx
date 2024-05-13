@@ -1,17 +1,32 @@
 
 import logo from "/logo.jpg"
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 
 
 import PropTypes from 'prop-types';
 import DropdownMenu from "./DropDeownMenu";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 
 
 const PrivateNavbar = ({ btnone }) => {
+    const navigate = useNavigate();
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("/api/auth/logout")
+            console.log(response.data)
+            toast.success("User logged out successfully");
+            navigate("/login")
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
 
 
@@ -45,9 +60,11 @@ const PrivateNavbar = ({ btnone }) => {
                 </div>
                 <div>
                     <div className=" mt-2 text-white font-semibold  ">
-                        <button className="  bg-slate-400 px-4 py-2 rounded-md hover:bg-slate-500 transition duration-100 ">
-                            {btnone}
-                        </button>
+                        <form onSubmit={handleLogout} >
+                            <button className="  bg-slate-400 px-4 py-2 rounded-md hover:bg-slate-500 transition duration-100 ">
+                                {btnone}
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

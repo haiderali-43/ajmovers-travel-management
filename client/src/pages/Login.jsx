@@ -17,7 +17,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", { email, password })
+      const response = await axios.post("/api/auth/login", { email, password })
       navigate("/dashboard")
       console.log(response.data)
       toast.success("User logged in successfully")
@@ -94,7 +94,7 @@ const Login = () => {
           </button>
         </div>
       </form>
- 
+
     </div>
   );
 };

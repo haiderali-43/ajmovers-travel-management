@@ -6,8 +6,6 @@ import { toast } from 'react-hot-toast'
 import axios from "axios";
 
 
-import 'react-toastify/ReactToastify.css';
-
 
 const Register = () => {
   const navigate = useNavigate()
@@ -25,7 +23,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/register", { name, email, password })
+      const response = await axios.post("/api/auth/signup", { name, email, password })
       console.log(response.data)
       toast.success("User registered successfully");
       navigate("/login");

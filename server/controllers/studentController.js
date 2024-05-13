@@ -1,16 +1,11 @@
 import prisma from "../db/db.config.js";
 
-// create new students
+
 export const createStudent = async (req, res) => {
   try {
     const { name, cantt, phone, stop, program } = req.body;
-    const userId = req.id;
-
-    const user = await prisma.user.findUnique({ where: { id: userId } });
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    const userId = req.userId;
+    const id = req.id;
 
     if (!name || !cantt || !phone || !stop || !program) {
       return res.status(400).json({ message: "Please fill all fields" });
@@ -18,6 +13,7 @@ export const createStudent = async (req, res) => {
     // Create a new student with user model connection
     const newStudent = await prisma.student.create({
       data: {
+        id,
         name,
         cantt,
         phone,
@@ -27,7 +23,7 @@ export const createStudent = async (req, res) => {
           connect: {
             id: userId,
           },
-        },
+        }, // Add a comma here
       },
     });
 
