@@ -1,11 +1,9 @@
 import prisma from "../db/db.config.js";
 
-
 export const createStudent = async (req, res) => {
   try {
     const { name, cantt, phone, stop, program } = req.body;
-    const userId = req.userId;
-    const id = req.id;
+    const userId = req.user.id;
 
     if (!name || !cantt || !phone || !stop || !program) {
       return res.status(400).json({ message: "Please fill all fields" });
@@ -13,7 +11,6 @@ export const createStudent = async (req, res) => {
     // Create a new student with user model connection
     const newStudent = await prisma.student.create({
       data: {
-        id,
         name,
         cantt,
         phone,
@@ -43,10 +40,16 @@ export const createStudent = async (req, res) => {
 // get all students
 export const getStudents = async (req, res) => {
   try {
-    const userId = req.userId;
-    const students = await prisma.student.findMany({
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    const userId = req.user.id;
+    const students = await prisma.student.findUnique({
       where: {
-        userId,
+        userId: userId,
+      },
+      include: {
+        user: true,
       },
     });
 

@@ -17,7 +17,7 @@ const DriversRegisteration = () => {
     e.preventDefault();
     try {
       const driver = { name, phone, vehicle };
-      const response = await axios.post('http://localhost:5000/api/drivers/createdriver', driver);
+      const response = await axios.post('api/drivers/createdriver', driver);
 
       toast.success("Driver registered successfully"
       );

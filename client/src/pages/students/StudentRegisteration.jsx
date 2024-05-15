@@ -21,7 +21,7 @@ const StudentRegisteration = () => {
 
     try {
       const student = { name, cantt, phone, stop, program };
-      const response = await axios.post('http://localhost:5000/api/students/createstudent', student)
+      const response = await axios.post('api/students/createstudent', student)
 
       toast.success("Student added successfully");
       navigate("/studentslist")

@@ -22,7 +22,7 @@ export const updateRentStatus = async (req, res) => {
 const resetRentStatus = async () => {
   try {
     await prisma.student.updateMany({
-      where: {},
+      where: { rent: true },
       data: { rent: false },
     });
   } catch (error) {
