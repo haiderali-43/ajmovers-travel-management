@@ -2,9 +2,14 @@ import prisma from "../db/db.config.js";
 
 // create drivers
 export const createDrivers = async (req, res) => {
-  const { name, phone, vehicle } = req.body;
-  const userId = req.userId;
   try {
+    const { name, phone, vehicle } = req.body;
+    const userId = req.user.id;
+
+    if (!name || !phone || !vehicle) {
+      return res.status(400).json({ message: "Please fill all fields" });
+    }
+
     const driver = await prisma.driver.create({
       data: {
         name,
@@ -15,6 +20,9 @@ export const createDrivers = async (req, res) => {
             id: userId,
           },
         },
+      },
+      include: {
+        user: true,
       },
     });
 

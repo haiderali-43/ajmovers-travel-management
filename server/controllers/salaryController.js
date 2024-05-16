@@ -17,10 +17,10 @@ export const updateDriverSalaryStatus = async (req, res) => {
   }
 };
 
-schedule.scheduleJob("0 0 1 * *", async () => {
+schedule.scheduleJob("0 0 1 * *", async (userId) => {
   try {
     await prisma.driver.updateMany({
-      where: {},
+      where: { userId },
       data: { salary: false },
     });
     console.log("Salary Status reset succesfully");

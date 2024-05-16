@@ -9,7 +9,7 @@ import axios from "axios"
 
 const StudentRegisteration = () => {
   const [name, setName] = useState("")
-  const [cantt, setCantt] = useState("")
+  const [cantt, setCantt] = useState("GT Road")
   const [phone, setPhone] = useState("")
   const [stop, setStop] = useState("")
   const [program, setProgram] = useState("")
@@ -27,7 +27,7 @@ const StudentRegisteration = () => {
       navigate("/studentslist")
       console.log(response.data)
     } catch (error) {
-      toast.error("Failed to add student") 
+      toast.error("Failed to add student")
     }
 
 
@@ -47,8 +47,11 @@ const StudentRegisteration = () => {
           </div>
           <div className="mb-4 mt-2">
             <div>
-              <label htmlFor="Email" className="block mb-2">Cantt/GT Road</label>
-              <input type="text" placeholder="Enter the Cantt in or Cantt out" className="w-full px-4 py-2 border border-gray-300 rounded" value={cantt} onChange={(e) => setCantt(e.target.value)} />
+              <label htmlFor="Cantt" className="block mb-2">Cantt/GT Road</label>
+              <select className="w-full px-4 py-2 border border-gray-300 rounded" value={cantt} onChange={(e) => setCantt(e.target.value)}>
+                <option value="Wah Cantt">Wah Cantt</option>
+                <option value="GT Road">GT Road</option>
+              </select>
             </div>
           </div>
           <div className="mb-4">

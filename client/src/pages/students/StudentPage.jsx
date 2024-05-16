@@ -3,6 +3,7 @@ import PrivateNavbar from "../../components/PrivateNavbar";
 import axios from 'axios';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai'
 import UpdateCompStudent from '../../components/UpdateCompStudent';
+import toast from 'react-hot-toast';
 
 
 
@@ -18,7 +19,7 @@ const StudentPage = () => {
 
   //get all students
   useEffect(() => {
-    axios.get('http://localhost:5000/api/students/getstudents')
+    axios.get('api/students/getstudents')
       .then(res => setStudents(res.data.data))
       .catch(err => console.log(err))
   })
@@ -31,7 +32,8 @@ const StudentPage = () => {
   const handleStudentdelete = async (e, studentId) => {
     e.preventDefault()
     try {
-      const deletestudent = await axios.delete(`http://localhost:5000/api/students/deletestudent/${studentId}`)
+      const deletestudent = await axios.delete(`/api/students/deletestudent/${studentId}`)
+      toast.success("Student deleted successfully")
       console.log(deletestudent)
     } catch (error) {
       console.log(error.message)

@@ -5,10 +5,11 @@ export const updateRentStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const studentId = parseInt(id);
+    const userId = req.userId;
 
     // update rent status
     await prisma.student.update({
-      where: { id: studentId },
+      where: { id: studentId, userId },
       data: { rent: true },
     });
 
@@ -21,8 +22,9 @@ export const updateRentStatus = async (req, res) => {
 
 const resetRentStatus = async () => {
   try {
+    const userId = req.userId;
     await prisma.student.updateMany({
-      where: { rent: true },
+      where: { userId },
       data: { rent: false },
     });
   } catch (error) {
@@ -34,4 +36,4 @@ const resetRentStatus = async () => {
 resetRentStatus();
 
 // Schedule the function to run every day at 3:00 AM (in milliseconds)
-schedule.scheduleJob("0 0 1 * *", resetRentStatus);
+schedule.scheduleJob("0 12 * * *", resetRentStatus);

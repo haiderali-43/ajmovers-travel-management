@@ -8,7 +8,8 @@ export const createStudent = async (req, res) => {
     if (!name || !cantt || !phone || !stop || !program) {
       return res.status(400).json({ message: "Please fill all fields" });
     }
-    // Create a new student with user model connection
+
+    // Create a new student associated with the user
     const newStudent = await prisma.student.create({
       data: {
         name,
@@ -17,11 +18,10 @@ export const createStudent = async (req, res) => {
         stop,
         program,
         user: {
-          connect: {
-            id: userId,
-          },
-        }, // Add a comma here
+          connect: { id: userId }, // Connect the student to the user
+        },
       },
+      include: { user: true }, // Fetch user data along with the student
     });
 
     return res.status(200).json({
@@ -30,6 +30,7 @@ export const createStudent = async (req, res) => {
       phone: newStudent.phone,
       stop: newStudent.stop,
       program: newStudent.program,
+      userId: newStudent.user.id, // Include userId in the response
     });
   } catch (error) {
     console.error(error); // Log the error for debugging purposes
@@ -40,11 +41,10 @@ export const createStudent = async (req, res) => {
 // get all students
 export const getStudents = async (req, res) => {
   try {
-    if (!req.user) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-    const userId = req.user.id;
-    const students = await prisma.student.findUnique({
+    const userId = req.userId;
+
+    // Find all students associated with the user
+    const students = await prisma.student.findMany({
       where: {
         userId: userId,
       },
