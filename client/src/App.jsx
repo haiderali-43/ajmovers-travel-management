@@ -43,7 +43,7 @@ const App = () => {
           <Route path="/addstudents" element={authUser ? <StudentRegisteration /> : <Navigate to={'/login'} />} />
           <Route path="/studentslist" element={authUser ? <StudentPage /> : <Navigate to={'/login'} />} />
           <Route path="/studentsrent" element={authUser ? <StudentsRent /> : <Navigate to={'/login'} />} />
-          <Route path="/adddrivers" element={authUser ? <DriversRegisteration /> : <Navigate to={'/login'} />} />
+          <Route path="/add_drivers" element={authUser ? <DriversRegisteration /> : <Navigate to={'/login'} />} />
           <Route path="/driverslist" element={authUser ? <DriversPage /> : <Navigate to={'/login'} />} />
           <Route path="/driverssalary" element={authUser ? <DriverSalary /> : <Navigate to={'/login'} />} />
           <Route path="/contact" element={<Contact />} />

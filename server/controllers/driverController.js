@@ -1,10 +1,12 @@
 import prisma from "../db/db.config.js";
 
 // create drivers
+
 export const createDrivers = async (req, res) => {
   try {
     const { name, phone, vehicle } = req.body;
-    const userId = req.user.id;
+
+    const userId = req.userId;
 
     if (!name || !phone || !vehicle) {
       return res.status(400).json({ message: "Please fill all fields" });
@@ -16,19 +18,21 @@ export const createDrivers = async (req, res) => {
         phone,
         vehicle,
         user: {
-          connect: {
-            id: userId,
-          },
+          connect: { id: userId }, // Connect the driver to the user
         },
       },
-      include: {
-        user: true,
-      },
+      include: { user: true },
     });
 
-    res.status(200).json({ driver, message: "Driver added succesfully" });
+    res.status(200).json({
+      name: driver.name,
+      phone: driver.phone,
+      vehicle: driver.vehicle,
+      userId: driver.user.id,
+    });
   } catch (error) {
-    res.status(500).json({ error: "Error adding driver" });
+    // Log the error for debugging
+    res.status(500).json({ error: "Error adding driver", message: error});
   }
 };
 

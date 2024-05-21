@@ -20,20 +20,14 @@ export const updateRentStatus = async (req, res) => {
   }
 };
 
-const resetRentStatus = async () => {
+schedule.scheduleJob("0 0 1 * *", async (userId) => {
   try {
-    const userId = req.userId;
     await prisma.student.updateMany({
       where: { userId },
       data: { rent: false },
     });
+    console.log("Rent Status reset succesfully");
   } catch (error) {
-    console.error("Error resetting rent status:", error);
+    console.log(error.message);
   }
-};
-
-// Run the function initially
-resetRentStatus();
-
-// Schedule the function to run every day at 3:00 AM (in milliseconds)
-schedule.scheduleJob("0 12 * * *", resetRentStatus);
+});

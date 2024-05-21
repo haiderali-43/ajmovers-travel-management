@@ -70,10 +70,10 @@ const DropdownMenu = () => {
                         aria-haspopup="true"
                         onClick={() => toggleMenu('driver')}
                     >
-                        {isActiveRoute('/adddrivers') ? 'Add Drivers' : ''}
+                        {isActiveRoute('/add_drivers') ? 'Add Drivers' : ''}
                         {isActiveRoute('/driverslist') ? 'Drivers List' : ''}
                         {isActiveRoute('/driverssalary') ? 'Drivers Salary' : ''}
-                        {!isActiveRoute('/adddrivers') && !isActiveRoute('/driverslist') && !isActiveRoute('/driverssalary') ? 'Drivers' : ""}
+                        {!isActiveRoute('/add_drivers') && !isActiveRoute('/driverslist') && !isActiveRoute('/driverssalary') ? 'Drivers' : ""}
                         <svg
                             className="-mr-1 ml-2 h-5 w-5"
                             xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +139,7 @@ const DropdownMenu = () => {
                 >
                     <div className="py-1" role="none">
                         <NavLink
-                            to={'/adddrivers'}
+                            to={'/add_drivers'}
                             className={`text-gray-700 block px-4 py-2 text-sm ${isActiveRoute('/adddrivers') ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
                             role="menuitem"
                             tabIndex="-1"
