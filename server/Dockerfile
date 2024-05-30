@@ -5,13 +5,12 @@ FROM node:20.10.0
 WORKDIR /app
 
 # Copy the source code to the working directory
-COPY . . /package.json./
+COPY package.json .
 
 # Install dependencies (if any)
 RUN npm install
+COPY  . .
 
-# Expose a port (if needed)
-EXPOSE 8080
 
 # Define the command to run the application
 CMD ["npm", "start"]

@@ -36,7 +36,15 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
+      database:
+        image: postgres
+        container_name: postgres-container
+        networks:
+          - mern-stack-network
+        ports:
+          - "5432:5432"
+        volumes:
+          - postgres-data:/db/data
     environment:
       - POSTGRES_USER="default"
       - POSTGRES_PASSWORD="yclBRTw4N1sS"
@@ -44,4 +52,5 @@ services:
 
 networks:
   mern-stack-network:
-    driver: bridge
+volumes:
+  postgres-data:
