@@ -20,7 +20,7 @@ const DriversPage = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/drivers/getdrivers')
+    axios.get('/api/drivers/getdrivers')
       .then(res => setDrivers(res.data))
       .catch(err => console.error(err))
   }, [])

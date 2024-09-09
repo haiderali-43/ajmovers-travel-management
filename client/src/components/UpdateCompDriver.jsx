@@ -18,7 +18,7 @@ const UpdateCompDriver = ({ driverId, }) => {
 
     useEffect(() => {
         const fetchdriverbyid = (driverId) => {
-            axios.get(`http:localhost:5000/api/drivers/getdriverbyid/${driverId}`)
+            axios.get(`https://ajmovers-backend.vercel.app/api/drivers/getdriverbyid/${driverId}`)
                 .then(res => {
 
                     setName(res.data.name)
@@ -36,7 +36,7 @@ const UpdateCompDriver = ({ driverId, }) => {
     const handleUpdatedriverInformation = async (e, driverId) => {
         e.preventDefault()
         try {
-            const response = await axios.put(`http://localhost:5000/api/drivers/updatedriver/${driverId}`, { name, phone, vehicle })
+            const response = await axios.put(`https://ajmovers-backend.vercel.app/api/drivers/updatedriver/${driverId}`, { name, phone, vehicle })
             
             toast.success("Student information updated successfully", {
                 position: "top-right",

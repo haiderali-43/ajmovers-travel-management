@@ -16,7 +16,7 @@ const StudentsRent = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/students/getstudents')
+    axios.get('/api/students/getstudents')
       .then(res => {
         setStudents(res.data.data);
 
@@ -50,7 +50,7 @@ const StudentsRent = () => {
         rent: newRentStatus,
         name: students.find(student => student.id === studentId).name
       };
-      const response = await axios.put(`http://localhost:5000/api/students/updaterentstatus/${studentId}`, rentstatus);
+      const response = await axios.put(`/api/students/updaterentstatus/${studentId}`, rentstatus);
       toast.success(`${rentstatus.name} rent has been paid`
       );
       console.log("rent status updated")

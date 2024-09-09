@@ -28,7 +28,7 @@ const DriverSalary = () => {
         [driverId]: newSalaryStatus
       }))
       const salarystatus = { salary: newSalaryStatus, name: drivers.find(driver => driver.id === driverId).name }
-      const response = await axios.put(`http://localhost:5000/api/drivers/updatesalarystatus/${driverId}`, salarystatus)
+      const response = await axios.put(`/api/drivers/updatesalarystatus/${driverId}`, salarystatus)
       toast.success(`Salary status updated successfully of ${driverSalaryStatus.name}`
       )
       console.log(response)
@@ -47,7 +47,7 @@ const DriverSalary = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/drivers/getdrivers')
+    axios.get('api/drivers/getdrivers')
       .then(response => {
         // Update drivers state
         setDrivers(response.data);

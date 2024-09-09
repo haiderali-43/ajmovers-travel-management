@@ -25,7 +25,7 @@ const UpdateCompStudent = ({ studentId }) => {
 
 
         const fetchstudentdatabyid = (studentId) => {
-            axios.get(`http://localhost:5000/api/students/getstudent/${studentId}`)
+            axios.get(`https://ajmovers-backend.vercel.app//api/students/getstudent/${studentId}`)
 
                 .then(res => {
                     console.log("Student data:", res.data);
@@ -48,7 +48,7 @@ const UpdateCompStudent = ({ studentId }) => {
         e.preventDefault()
         try {
 
-            const response = await axios.put(`http://localhost:5000/api/students/updatestudent/${studentId}`, { name, cantt, phone, stop, program });
+            const response = await axios.put(`https://ajmovers-backend.vercel.app//api/students/updatestudent/${studentId}`, { name, cantt, phone, stop, program });
             toast.success(`Information Updated successfully`, {
                 position: 'top-right',
                 autoClose: '1000'
